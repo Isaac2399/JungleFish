@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -26,9 +27,9 @@ export const Header: React.FC = () => {
           <a href="#reality" className="text-sm font-medium text-brand-light/80 hover:text-brand-accent transition-colors tracking-wide">El Proyecto</a>
           <a href="#tokenomics" className="text-sm font-medium text-brand-light/80 hover:text-brand-accent transition-colors tracking-wide">Tokenomics</a>
           <a href="#calculator" className="text-sm font-medium text-brand-light/80 hover:text-brand-accent transition-colors tracking-wide">Calculadora ROI</a>
-          <a href="#roadmap" className="px-6 py-2.5 text-xs font-bold bg-transparent border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-brand-dark hover:shadow-[0_4px_20px_rgba(251,191,36,0.2)] rounded-full transition-all duration-300 tracking-widest uppercase">
-            Presale Access
-          </a>
+          <Link to="/login" className="px-6 py-2.5 text-xs font-bold bg-transparent border border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-brand-dark hover:shadow-[0_4px_20px_rgba(251,191,36,0.2)] rounded-full transition-all duration-300 tracking-widest uppercase">
+            Acceso Huésped
+          </Link>
         </nav>
       </div>
     </header>

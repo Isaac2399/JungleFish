@@ -193,7 +193,7 @@ export const InvestmentPackages: React.FC<InvestmentPackagesProps> = ({ onOpenBu
       <BuildYourOwnModal 
         isOpen={isBuildModalOpen} 
         onClose={() => setIsBuildModalOpen(false)} 
-        onConfirmPurchase={(total) => {
+        onConfirmPurchase={() => {
           setIsBuildModalOpen(false);
           onOpenBuyModal?.();
         }}
