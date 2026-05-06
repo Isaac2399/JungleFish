@@ -5,11 +5,23 @@ import mailchimp from '@mailchimp/mailchimp_marketing';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-dotenv.config();
+import { initializeApp } from 'firebase-admin/app';
+import { getFirestore, FieldValue } from 'firebase-admin/firestore';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '.env') });
+
+// Initialize Firebase Admin
+try {
+  initializeApp();
+} catch (error) {
+  if (!/already exists/.test(error.message)) {
+    console.error('Firebase Admin initialization error', error.stack);
+  }
+}
+const db = getFirestore();
 
 const app = express();
 const port = process.env.PORT || 4242;
@@ -43,27 +55,47 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
   // Handle the checkout.session.completed event
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
-    // We pass the email through customer_email or metadata
-    const email = session.customer_details?.email || session.metadata?.email;
     
-    if (email) {
-      console.log(`Payment successful for ${email}. Adding to Mailchimp...`);
-      try {
-        const response = await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
-          email_address: email,
-          status: 'pending', // This triggers Double Opt-in
-          merge_fields: {
-            // Include source to track where they came from
-            SOURCE: 'Jungle Fish Landing Page Stripe',
-          }
-        });
-        console.log(`Successfully added user to Mailchimp with status 'pending': ${response.id}`);
-      } catch (err) {
-        // Log but don't fail the webhook processing itself for Stripe
-        console.error(`Error adding to Mailchimp:`, err.status, err.response?.text || err.message);
+    // Check if it's a token purchase
+    if (session.metadata?.type === 'token_purchase') {
+      const uid = session.metadata.uid;
+      const amountStr = session.metadata.amount;
+      if (uid && amountStr) {
+        const amount = parseInt(amountStr, 10);
+        console.log(`Token purchase successful for user ${uid}. Adding ${amount} tokens.`);
+        try {
+          const userRef = db.collection('users').doc(uid);
+          await userRef.set({
+            balance_jfish: FieldValue.increment(amount)
+          }, { merge: true });
+          console.log(`Successfully added ${amount} tokens to user ${uid}`);
+        } catch (err) {
+          console.error(`Error updating token balance for user ${uid}:`, err);
+        }
       }
     } else {
-      console.warn("No email found in completed checkout session.");
+      // Original logic for early access subscription
+      const email = session.customer_details?.email || session.metadata?.email;
+      
+      if (email) {
+        console.log(`Payment successful for ${email}. Adding to Mailchimp...`);
+        try {
+          const response = await mailchimp.lists.addListMember(process.env.MAILCHIMP_AUDIENCE_ID, {
+            email_address: email,
+            status: 'pending', // This triggers Double Opt-in
+            merge_fields: {
+              // Include source to track where they came from
+              SOURCE: 'Jungle Fish Landing Page Stripe',
+            }
+          });
+          console.log(`Successfully added user to Mailchimp with status 'pending': ${response.id}`);
+        } catch (err) {
+          // Log but don't fail the webhook processing itself for Stripe
+          console.error(`Error adding to Mailchimp:`, err.status, err.response?.text || err.message);
+        }
+      } else {
+        console.warn("No email found in completed checkout session.");
+      }
     }
   }
 
@@ -103,6 +135,46 @@ app.post('/create-checkout-session', async (req, res) => {
       customer_email: email, // Auto-fill checkout email
       metadata: {
         email: email // Also keep it in metadata just in case
+      }
+    });
+
+    res.json({ id: session.id, url: session.url });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/buy-tokens', async (req, res) => {
+  const { uid, email, amount } = req.body;
+  if (!uid || !amount) {
+    return res.status(400).json({ error: 'UID and amount are required' });
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Jungle Fish Tokens ($JFISH)',
+              description: `${amount} $JFISH tokens for your account.`,
+            },
+            unit_amount: 12, // $0.12 USD in cents
+          },
+          quantity: amount,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/dashboard?success=true`,
+      cancel_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/dashboard?canceled=true`,
+      customer_email: email,
+      metadata: {
+        type: 'token_purchase',
+        uid: uid,
+        amount: amount.toString()
       }
     });
 
