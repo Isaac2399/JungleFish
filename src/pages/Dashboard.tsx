@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { db } from '../lib/firebase';
-import { doc, collection, query, where, orderBy, onSnapshot, addDoc, serverTimestamp, getDocs } from 'firebase/firestore';
+import { doc, collection, query, where, orderBy, onSnapshot, getDocs } from 'firebase/firestore';
 import { Coins, ShoppingCart, History, Plus } from 'lucide-react';
 import { enviarComanda } from '../lib/comandas';
 
@@ -19,6 +19,12 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (!user) return;
+
+    // Load Stronghold SDK
+    const script = document.createElement('script');
+    script.src = 'https://api.strongholdpay.com/v2/js';
+    script.async = true;
+    document.body.appendChild(script);
 
     // Listen to user balance
     const userRef = doc(db, 'users', user.uid);
@@ -50,13 +56,17 @@ export const Dashboard = () => {
     return () => {
       unsubUser();
       unsubOrders();
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, [user]);
 
   const handleBuyTokens = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4242/buy-tokens', {
+      // Create charge on our backend
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4242'}/create-stronghold-charge`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -66,11 +76,56 @@ export const Dashboard = () => {
         })
       });
       const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url;
+      
+      if (data.customerToken) {
+         // Open Stronghold Pay Popup
+         const Stronghold = (window as any).Stronghold;
+         if (Stronghold) {
+            const strongholdPay = new Stronghold.Pay({
+                publishableKey: import.meta.env.VITE_STRONGHOLD_PUBLISHABLE_KEY || 'pk_sandbox_REPLACE_ME',
+                environment: 'sandbox',
+                integrationId: import.meta.env.VITE_STRONGHOLD_INTEGRATION_ID || 'REPLACE_ME'
+            });
+            // Step 1: Add Payment Source
+            strongholdPay.addPaymentSource(data.customerToken, {
+                onSuccess: function (paymentSource: any) {
+                    // Step 2: Charge the newly added payment source
+                    strongholdPay.charge(data.customerToken, {
+                        authorizeOnly: false,
+                        charge: {
+                            type: 'bank_debit_cnp', // Ensure type is correct based on SDK docs
+                            amount: data.amountInCents,
+                            currency: 'usd',
+                            paymentSourceId: paymentSource.id
+                        },
+                        onSuccess: (charge: any) => {
+                            alert('Pago exitoso. Los tokens se verán reflejados pronto.');
+                            // The backend webhook will handle incrementing the balance
+                        },
+                        onError: (err: any) => {
+                            console.error("Charge failed:", err);
+                            alert("El cobro falló o fue cancelado.");
+                        }
+                    });
+                },
+                onExit: function () {
+                    console.log("User exited the payment source flow.");
+                },
+                onError: function (err: any) {
+                    console.error("Add payment source failed:", err);
+                    alert("No se pudo conectar el método de pago.");
+                }
+            });
+         } else {
+            alert('El SDK de Stronghold no ha cargado aún. Intenta de nuevo en unos segundos.');
+         }
+      } else {
+         console.error('Failed to create customer token:', data);
+         alert('Error al inicializar el pago con Stronghold.');
       }
     } catch (error) {
       console.error('Error buying tokens:', error);
+      alert('Error de conexión con el servidor de pagos.');
     }
   };
 
