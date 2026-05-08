@@ -4,32 +4,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 const sectionsData = [
   {
     id: 'hero',
-    title: 'Inicio',
-    text: 'Bienvenido a Jungle Fish, el primer ecosistema forestal tokenizado respaldado por RWA (Real World Assets). Descubre cómo ser parte.',
-    icon: '🌴'
+    title: 'Explore',
+    text: 'Welcome to Paradise & Beyond, your portal to authentic Costa Rican experiences backed by the Stellar network.',
+    icon: '✨'
   },
   {
-    id: 'reality',
-    title: 'El Proyecto',
-    text: 'Conoce nuestras instalaciones físicas en la reserva y la visión comunitaria de permacultura.',
-    icon: '🌍'
+    id: 'partners',
+    title: 'Experiences',
+    text: 'Discover Jungle Fish, Trapiche de Pemo, and Finca de Karl, the pillars of our local ecosystem.',
+    icon: '🤝'
   },
   {
-    id: 'tokenomics',
-    title: 'Tokenomics',
-    text: 'Entiende la distribución de los 10M de $JFISH y los términos técnicos de la preventa Fase 1.',
-    icon: '💎'
-  },
-  {
-    id: 'calculator',
-    title: 'Calculadora ROI',
-    text: 'Simula tus retornos y beneficios anuales basados en ocupación del resort y tus tokens adquiridos.',
-    icon: '🧮'
+    id: 'payments',
+    title: 'Payments',
+    text: 'Stronghold infrastructure for fast and transparent payments with card or crypto.',
+    icon: '💳'
   },
   {
     id: 'roadmap',
-    title: 'Fase 1: Presupuesto',
-    text: 'Observa transparente e interactivamente en qué se invertirá el hard cap de inversión.',
+    title: 'About Us',
+    text: 'Our vision for expanding regenerative tourism throughout the region.',
     icon: '🗺️'
   }
 ];
@@ -83,9 +77,9 @@ export const WalkthroughWidget = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.4, type: 'spring' }}
-            className="w-72 sm:w-80 bg-[#111]/95 backdrop-blur-xl border border-[#2ecc71]/40 rounded-2xl shadow-[0_15px_40px_-5px_rgba(46,204,113,0.3)] overflow-hidden"
+            className="w-72 sm:w-80 bg-[#0A110D]/95 backdrop-blur-xl border border-blue-500/40 rounded-2xl shadow-[0_15px_40px_-5px_rgba(59,130,246,0.3)] overflow-hidden"
         >
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#2ecc71] to-[#3498db]"></div>
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-[#00C896] to-brand-accent"></div>
             
             <div className="p-5 relative">
             <button 
@@ -96,7 +90,7 @@ export const WalkthroughWidget = () => {
                 &times;
             </button>
 
-            <p className="text-[#2ecc71] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2 drop-shadow-md">
+            <p className="text-[#00C896] text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-2 flex items-center gap-2 drop-shadow-md">
                 <span className="text-sm">{activeSection.icon}</span> {activeSection.title}
             </p>
             <motion.p 
@@ -112,7 +106,7 @@ export const WalkthroughWidget = () => {
                 {sectionsData.map((s) => (
                 <div 
                     key={s.id}
-                    className={`h-1 rounded-full transition-all duration-500 ${s.id === activeSection.id ? 'w-4 bg-[#2ecc71]' : 'w-1 bg-[#2ecc71]/30'}`}
+                    className={`h-1 rounded-full transition-all duration-500 ${s.id === activeSection.id ? 'w-4 bg-[#00C896]' : 'w-1 bg-[#00C896]/30'}`}
                 />
                 ))}
             </div>
