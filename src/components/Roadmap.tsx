@@ -1,156 +1,156 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const phases = [
   {
-    quarter: 'Q2 2026',
-    title: 'Fase 1: Preventa Inicial',
-    description: 'Levantamiento de Capital RWA y distribución de paquetes fundadores.'
+    phase: 'Phase 1 - Q2 2026',
+    title: 'Paradise & Beyond Launch',
+    description: 'Integration of founding partners and opening of the ecosystem portal on Stellar network.'
   },
   {
-    quarter: 'Q3 2026',
-    title: 'Construcción',
-    description: 'Inicio de obras: 7 Cabañas Premium, Escuela Mango e Infraestructura Base.'
+    phase: 'Phase 2 - Q3 2026',
+    title: 'Infrastructure Expansion',
+    description: 'Upgrades at Jungle Fish, automation at Trapiche de Pemo, and new systems at Finca de Karl.'
   },
   {
-    quarter: 'Q4 2026',
-    title: 'Apertura Oficial',
-    description: 'Inauguración del resort y primeras redenciones de utilidad (reservas).'
+    phase: 'Phase 3 - Q4 2026',
+    title: 'Global Ecosystem',
+    description: 'Full opening of redemptions and onboarding of new local partners into the network.'
   }
 ];
 
 export const Roadmap = () => {
   return (
-    <section id="roadmap" className="py-32 bg-[#0a0f0d] relative overflow-hidden border-t border-[#2ecc71]/10">
-      {/* Premium Ambience */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[500px] bg-gradient-to-b from-[#2ecc71]/5 to-transparent blur-[120px] pointer-events-none" />
+    <section id="about" className="py-32 bg-[#0A110D] relative overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[500px] bg-gradient-to-b from-brand-green/10 to-transparent blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* BLOQUE 4: RESPALDO EN ACTIVOS REALES */}
-        <div className="mb-32">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-accent/30 bg-brand-accent/5 text-brand-accent text-xs uppercase tracking-widest font-medium mb-6"
-            >
-              Confianza & Transparencia
-            </motion.div>
-            <motion.h2 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-display font-bold text-white mb-6"
-            >
-              Seguridad Financiera: <span className="text-[#2D5A27] text-transparent bg-clip-text bg-gradient-to-r from-[#2ecc71] to-[#2D5A27]">Respaldado por Activos Tangibles</span>
-            </motion.h2>
-            <motion.p 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-brand-light/70 text-lg leading-relaxed mb-8"
-            >
-              Tu inversión no está en la nube; está en la tierra. Los fondos recaudados en esta Fase 1 se destinan 100% al desarrollo físico en nuestra propiedad de Pérez Zeledón.
-            </motion.p>
+        {/* BLOQUE: SEGURIDAD Y RESPALDO */}
+        <div className="mb-40">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-4xl mx-auto mb-20"
+          >
+            <span className="text-brand-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Trust & Transparency</span>
+            <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8 tracking-tighter uppercase leading-none">
+              Real World <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-accent">Backed Assets</span>
+            </h2>
+            <p className="text-brand-light/70 text-xl leading-relaxed mb-12">
+              Every package is backed by tangible assets and revenue streams from our local partners. Paradise & Beyond transforms land and tradition into secure digital value.
+            </p>
             
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex justify-center"
-            >
-              <a href="#" className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors px-6 py-3 rounded-full text-white font-medium group">
+            <div className="flex justify-center">
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href="#" 
+                className="flex items-center gap-3 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 transition-all px-10 py-5 rounded-full text-white font-bold uppercase tracking-widest text-xs group shadow-xl"
+              >
                 <svg className="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Leer nuestro Whitepaper completo
-              </a>
-            </motion.div>
-          </div>
+                Read our Whitepaper
+              </motion.a>
+            </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:border-[#2ecc71]/50 transition-colors">
-              <div className="text-3xl">🏗️</div>
-              <div>
-                <h4 className="text-white font-bold mb-1">7 Cabañas Premium</h4>
-                <p className="text-sm text-brand-light/60">Construcción de unidades de hospedaje 7x7 con diseño ecológico.</p>
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:border-[#2ecc71]/50 transition-colors">
-              <div className="text-3xl">🏫</div>
-              <div>
-                <h4 className="text-white font-bold mb-1">Escuela Mango</h4>
-                <p className="text-sm text-brand-light/60">Desarrollo de la infraestructura educativa y área de juegos.</p>
-              </div>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-start gap-4 hover:border-[#2ecc71]/50 transition-colors">
-              <div className="text-3xl">🌿</div>
-              <div>
-                <h4 className="text-white font-bold mb-1">Infraestructura</h4>
-                <p className="text-sm text-brand-light/60">Senderos ecológicos, internet de alta velocidad y caminos.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* BLOQUE 6: ROADMAP Y EQUIPO */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-          
-          {/* Roadmap Timeline */}
-          <div>
-            <h3 className="text-3xl font-display font-bold text-white mb-10">Línea de Tiempo</h3>
-            <div className="relative border-l border-brand-green/30 ml-4 md:ml-0 space-y-12">
-              {phases.map((phase, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative pl-8"
-                >
-                  <div className="absolute w-4 h-4 rounded-full bg-brand-accent -left-[8.5px] top-1.5 shadow-[0_0_10px_rgba(251,191,36,0.5)]"></div>
-                  <div className="text-brand-accent font-bold text-sm tracking-widest uppercase mb-1">{phase.quarter}</div>
-                  <h4 className="text-xl font-display text-white mb-2">{phase.title}</h4>
-                  <p className="text-brand-light/60 text-sm">{phase.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* El Equipo */}
-          <div>
-            <h3 className="text-3xl font-display font-bold text-white mb-10">El Equipo & Alianzas</h3>
-            <p className="text-brand-light/70 mb-8">Liderado por un equipo multidisciplinario con sólida experiencia, uniendo tecnología Web3 con sabiduría de la tierra.</p>
-            
-            <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { icon: '🏨', title: 'Premium Cabins', desc: 'Luxury lodging infrastructure at Jungle Fish Sanctuary.' },
+              { icon: '☕', title: 'Culture & Coffee', desc: 'Preserving tradition and milling at Trapiche de Pemo.' },
+              { icon: '🥬', title: 'Sustainability', desc: 'Regenerative organic agriculture at Finca de Karl.' }
+            ].map((item, idx) => (
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-brand-dark/50 border border-[#2ecc71]/20 p-6 rounded-2xl"
+                transition={{ delay: idx * 0.1 }}
+                className="bg-white/[0.03] border border-white/10 p-8 rounded-[2rem] flex items-start gap-6 hover:border-brand-green/50 transition-all hover:bg-white/[0.05] group"
               >
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-brand-accent to-orange-500 flex items-center justify-center text-brand-dark font-bold text-xl">I</div>
-                  <div>
-                    <h4 className="text-white font-bold text-lg">Isaac & Equipo</h4>
-                    <p className="text-brand-accent text-xs uppercase tracking-widest">Project Management & Tech</p>
-                  </div>
+                <div className="text-4xl group-hover:scale-125 transition-transform duration-500">{item.icon}</div>
+                <div>
+                  <h4 className="text-white font-bold mb-2 text-xl">{item.title}</h4>
+                  <p className="text-sm text-brand-light/60 leading-relaxed">{item.desc}</p>
                 </div>
-                <p className="text-sm text-brand-light/60">
-                  Más de 10 años en Project Management y en el ecosistema tecnológico con Tavuel, asegurando una ejecución técnica, administrativa y financiera impecable para Jungle Fish.
-                </p>
               </motion.div>
-
-
-            </div>
+            ))}
           </div>
-
         </div>
+
+        {/* BLOQUE: ROADMAP */}
+        <div className="relative">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-center mb-24"
+          >
+             <h3 className="text-4xl font-display font-bold text-white uppercase tracking-tighter">Timeline to Expansion</h3>
+             <div className="h-1 w-20 bg-brand-accent mx-auto mt-4 rounded-full"></div>
+          </motion.div>
+
+          <div className="relative max-w-5xl mx-auto">
+             {/* Vertical Line */}
+             <div className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-brand-accent via-brand-green to-transparent opacity-30"></div>
+
+             <div className="space-y-24">
+                {phases.map((phase, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className={`relative flex flex-col md:flex-row items-center gap-8 ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
+                  >
+                    {/* Node */}
+                    <div className="absolute left-[20px] md:left-1/2 -translate-x-1/2 w-10 h-10 bg-[#0A110D] border-4 border-brand-accent rounded-full z-20 shadow-[0_0_15px_rgba(251,191,36,0.4)]"></div>
+
+                    {/* Content */}
+                    <div className="w-full md:w-[45%] pl-12 md:pl-0">
+                       <div className="p-8 rounded-[2rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl hover:border-brand-accent/40 transition-all shadow-2xl group">
+                          <div className="text-brand-accent font-bold text-xs tracking-widest uppercase mb-4">{phase.phase}</div>
+                          <h4 className="text-2xl text-white font-display font-bold mb-4 group-hover:text-brand-accent transition-colors">{phase.title}</h4>
+                          <p className="text-brand-light/70 text-lg leading-relaxed">{phase.description}</p>
+                       </div>
+                    </div>
+                    <div className="hidden md:block w-[45%]"></div>
+                  </motion.div>
+                ))}
+             </div>
+          </div>
+        </div>
+
+        {/* RESPALDO INSTITUCIONAL */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-40 text-center bg-gradient-to-br from-[#1A2E1A] to-transparent p-20 rounded-[3.5rem] border border-white/10"
+        >
+          <h3 className="text-4xl text-white font-display font-bold mb-10 tracking-tighter uppercase">Backed by Innovation</h3>
+          <p className="text-brand-light/70 text-xl max-w-4xl mx-auto leading-relaxed mb-16">
+            Paradise & Beyond is built on the world's leading institutional blockchain infrastructure, ensuring security, transparency, and global reach.
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24">
+             <div className="flex flex-col items-center gap-4 group cursor-help">
+                <span className="text-white font-black text-2xl tracking-tighter opacity-50 group-hover:opacity-100 transition-opacity">STELLAR</span>
+                <div className="h-0.5 w-0 group-hover:w-full bg-brand-green transition-all duration-500"></div>
+             </div>
+             <div className="flex flex-col items-center gap-4 group cursor-help">
+                <span className="text-white font-black text-2xl tracking-tighter opacity-50 group-hover:opacity-100 transition-opacity">STRONGHOLD</span>
+                <div className="h-0.5 w-0 group-hover:w-full bg-brand-accent transition-all duration-500"></div>
+             </div>
+             <div className="flex flex-col items-center gap-4 group cursor-help">
+                <span className="text-white font-black text-2xl tracking-tighter opacity-50 group-hover:opacity-100 transition-opacity">SOROBAN</span>
+                <div className="h-0.5 w-0 group-hover:w-full bg-blue-500 transition-all duration-500"></div>
+             </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

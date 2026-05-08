@@ -55,7 +55,7 @@ const FAQItem = ({ faq, index }: { faq: typeof faqs[0], index: number }) => {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#08120b] pt-32 pb-8 relative overflow-hidden">
+    <footer className="bg-[#0A110D] pt-32 pb-8 relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-6xl relative z-10 flex flex-col items-center">
         
         {/* FAQ Section */}
@@ -76,21 +76,55 @@ export const Footer: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="w-full max-w-4xl bg-gradient-to-br from-[#2D5A27] to-[#122b10] border border-[#2ecc71]/30 rounded-3xl p-10 text-center mb-24 shadow-[0_10px_40px_rgba(45,90,39,0.3)] relative overflow-hidden"
+          className="w-full max-w-4xl bg-gradient-to-br from-[#1E3A8A] to-[#1e1b4b] border border-blue-500/30 rounded-3xl p-10 text-center mb-16 shadow-[0_10px_40px_rgba(30,58,138,0.3)] relative overflow-hidden"
         >
           {/* subtle glow bg */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[200px] bg-brand-accent/20 blur-[80px] pointer-events-none rounded-full"></div>
           
           <h2 className="text-3xl md:text-5xl text-white font-display font-bold mb-6 relative z-10">
-            La selva te llama.
+            Únete al Ecosistema del Futuro.
           </h2>
           <p className="text-brand-light/90 text-lg mb-8 max-w-xl mx-auto relative z-10">
-            Invierte en naturaleza, invierte en ti. Asegura hoy tu participación temprana y construyamos el futuro del turismo regenerativo.
+            Descubre paquetes exclusivos de hospedaje, cultura y agricultura sostenible. El paraíso te espera a un clic de distancia.
           </p>
           <a href="#hero" className="inline-block bg-brand-accent text-brand-dark px-10 py-4 rounded-full font-bold uppercase tracking-wider hover:scale-105 hover:shadow-[0_0_30px_rgba(251,191,36,0.4)] transition-all relative z-10">
-            Adquirir $JFISH
+            Ver Paquetes
           </a>
         </motion.div>
+
+        {/* Payment Logos & Trust Text (Design Strip) */}
+        <div className="w-full mt-20 relative overflow-hidden">
+          <div className="bg-[#1A2E1A] py-6 px-10 flex flex-col md:flex-row items-center justify-between border-t border-white/10 relative z-10">
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-10 opacity-90 transition-all">
+               <span className="text-white font-black text-xl italic tracking-tighter">VISA</span>
+               <span className="text-white font-bold text-xl tracking-tighter flex items-center gap-1">
+                 <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                 <div className="w-4 h-4 bg-yellow-500 -ml-2 rounded-full"></div>
+                 mastercard
+               </span>
+               <span className="text-white font-bold text-xl flex items-center gap-2">
+                 <svg viewBox="0 0 24 24" className="w-6 h-6 fill-white"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg>
+                 Stronghold
+               </span>
+            </div>
+            
+            <div className="text-white font-bold tracking-[0.2em] text-sm my-6 md:my-0">
+               SEAMLESSLY PAY WITH STRONGHOLD PAY
+            </div>
+
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-10 opacity-90 transition-all">
+               <span className="text-white font-bold text-xl flex items-center gap-2">
+                 <div className="w-6 h-6 bg-[#2775CA] rounded-full flex items-center justify-center text-[10px]">$</div> USDC
+               </span>
+               <span className="text-white font-bold text-xl flex items-center gap-2">
+                 <svg viewBox="0 0 24 24" className="w-6 h-6 fill-white"><path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z"/></svg> Stellar <span className="font-light opacity-60 ml-1">network</span>
+               </span>
+            </div>
+
+            {/* Right side gradient glow */}
+            <div className="absolute right-0 top-0 bottom-0 w-64 bg-gradient-to-r from-transparent via-[#FF8C00]/40 to-[#FFB000]/60 pointer-events-none"></div>
+          </div>
+        </div>
 
         {/* Legal Disclaimer */}
         <div className="w-full text-center mb-10 max-w-4xl bg-brand-dark/50 border border-brand-green/30 p-6 rounded-xl text-xs text-brand-light/50 text-left leading-relaxed">
@@ -107,9 +141,9 @@ export const Footer: React.FC = () => {
         </div>
         
         {/* Footer Links */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between pt-8 border-t border-brand-green/30 text-brand-light/50 text-sm">
+        <div className="w-full flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 text-brand-light/50 text-sm mt-10">
           <div className="flex items-center gap-3 mb-6 md:mb-0">
-            <span className="font-display font-bold text-lg tracking-widest text-[#2ecc71] uppercase">Jungle Fish Eco-Resort</span>
+            <span className="font-display font-bold text-lg tracking-widest text-white uppercase">Paradise & Beyond</span>
             <span>&copy; {new Date().getFullYear()} Costa Rica</span>
           </div>
           <div className="flex gap-8">

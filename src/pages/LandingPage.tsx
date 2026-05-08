@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Header } from '../components/Header';
 import { Hero } from '../components/Hero';
 import { CurrentReality } from '../components/CurrentReality';
-import { Tokenomics } from '../components/Tokenomics';
+import { StellarPayments } from '../components/StellarPayments';
 import { InvestmentPackages } from '../components/InvestmentPackages';
-import { RoiCalculator } from '../components/RoiCalculator';
 import { Roadmap } from '../components/Roadmap';
 import { WalkthroughWidget } from '../components/WalkthroughWidget';
 import { Footer } from '../components/Footer';
@@ -19,9 +18,8 @@ export const LandingPage = () => {
       <main>
         <Hero />
         <CurrentReality />
-        <Tokenomics />
+        <StellarPayments />
         <InvestmentPackages onOpenBuyModal={() => setIsBuyModalOpen(true)} />
-        <RoiCalculator onOpenBuyModal={() => setIsBuyModalOpen(true)} />
         <Roadmap />
       </main>
       <Footer />
