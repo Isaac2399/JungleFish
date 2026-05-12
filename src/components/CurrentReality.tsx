@@ -1,28 +1,29 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useFirebaseAssets } from '../hooks/useFirebaseAssets';
+import { useLanguage } from '../context/LanguageContext';
 
 export const CurrentReality = () => {
   const { assets } = useFirebaseAssets();
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const { t } = useLanguage();
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const cards = [
     { 
-      title: 'Jungle Fish Sanctuary', 
-      text: 'An eco-lodge view in the fish sanctuary eco-lodge...',
+      title: t.current_reality.jungle_fish.title, 
+      text: t.current_reality.jungle_fish.desc,
       imageUrl: assets.partner_jungle_fish,
       icon: '🏨'
     },
     { 
-      title: 'Trapiche de Pemo', 
-      text: 'Traditional sugar mill in the area and coffee and carbon...',
+      title: t.current_reality.trapiche.title, 
+      text: t.current_reality.trapiche.desc,
       imageUrl: assets.partner_trapiche,
       icon: '☕'
     },
     { 
-      title: 'Finca de Karl', 
-      text: 'A sustainable organic farm in a sustainable organic farm...',
+      title: t.current_reality.finca.title, 
+      text: t.current_reality.finca.desc,
       imageUrl: assets.partner_finca,
       icon: '🥬'
     }
@@ -45,15 +46,15 @@ export const CurrentReality = () => {
           className="text-center mb-24 max-w-3xl mx-auto"
         >
           <motion.span 
-            initial={{ opacity: 0, tracking: '0.1em' }}
-            whileInView={{ opacity: 1, tracking: '0.3em' }}
+            initial={{ opacity: 0, letterSpacing: '0.1em' }}
+            whileInView={{ opacity: 1, letterSpacing: '0.3em' }}
             viewport={{ once: true }}
             className="text-brand-accent text-xs font-bold uppercase mb-4 block"
           >
-            Curated Experiences
+            {t.current_reality.subtitle}
           </motion.span>
           <h2 className="text-5xl md:text-7xl font-display font-bold mb-6 text-white uppercase tracking-tighter leading-none">
-            Our Partners <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-accent">& Ecosystem</span>
+            {t.current_reality.title_1} <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-accent">{t.current_reality.title_2}</span>
           </h2>
           <div className="h-1 w-24 bg-brand-accent mx-auto rounded-full"></div>
         </motion.div>
@@ -77,8 +78,8 @@ export const CurrentReality = () => {
                   ease: [0.16, 1, 0.3, 1] // Custom cubic-bezier for snappy reveal
                 }}
                 whileHover={{ y: -15, scale: 1.02 }}
-                onMouseEnter={() => { setActiveCard(i); setHoveredCard(i); }}
-                onClick={() => setActiveCard(i)}
+                onMouseEnter={() => { setHoveredCard(i); }}
+                onClick={() => {}}
                 className="relative overflow-hidden rounded-[2.5rem] border border-white/10 transition-all duration-500 cursor-pointer flex flex-col justify-end h-[450px] md:h-[550px] group shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
               >
                 {/* Background Image with Parallax-like scale */}
@@ -123,7 +124,7 @@ export const CurrentReality = () => {
                   </p>
                   
                   <div className="flex items-center gap-2 text-brand-accent font-bold text-xs tracking-widest uppercase mt-4">
-                    Explore Experience 
+                    {t.current_reality.explore_btn} 
                     <svg className="w-4 h-4 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -131,7 +132,7 @@ export const CurrentReality = () => {
                 </div>
 
                 {/* Border Glow on Hover */}
-                <div className="absolute inset-0 border-2 border-brand-accent/0 group-hover:border-brand-accent/30 rounded-[2.5rem] transition-colors pointer-events-none"></div>
+                <div className={`absolute inset-0 border-2 rounded-[2.5rem] transition-colors pointer-events-none ${isHovered ? 'border-brand-accent/30' : 'border-brand-accent/0'}`}></div>
               </motion.div>
             );
           })}
