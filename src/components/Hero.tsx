@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useFirebaseAssets } from '../hooks/useFirebaseAssets';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Hero: React.FC = () => {
   const { assets } = useFirebaseAssets();
+  const { t } = useLanguage();
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-[#0A110D]">
       {/* Background Visuals */}
@@ -63,51 +65,78 @@ export const Hero: React.FC = () => {
 
       <div className="container mx-auto px-4 z-20 flex flex-col items-center justify-center min-h-[80vh]">
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative max-w-6xl w-full flex flex-col items-center text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="relative max-w-5xl w-full flex flex-col items-center text-center"
         >
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-sans font-bold mb-6 leading-tight tracking-tight text-white uppercase"
+          {/* Elegant Top Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="mb-8 flex items-center gap-3 px-5 py-2.5 rounded-full border border-brand-accent/20 bg-black/40 backdrop-blur-md shadow-lg"
           >
-            Paradise & Beyond: Unlock<br/>The Authentic Costa Rica
-          </motion.h1>
+            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse shadow-[0_0_10px_rgba(251,191,36,0.8)]"></span>
+            <span className="text-xs tracking-[0.25em] uppercase font-bold text-white/90">
+              {t.hero.badge}
+            </span>
+          </motion.div>
+
+          {/* Staggered Elegant Title */}
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.5rem] font-display font-bold mb-8 leading-[1.05] tracking-tight text-white flex flex-col items-center gap-1">
+            <motion.span 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="block"
+            >
+              {t.hero.unlock}
+            </motion.span>
+            <motion.span 
+              initial={{ opacity: 0, y: 40, rotateX: 20 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-light via-brand-accent to-[#FF8C00] drop-shadow-[0_0_30px_rgba(251,191,36,0.15)] pb-4"
+            >
+              {t.hero.authentic}
+            </motion.span>
+          </h1>
           
+          {/* Refined Subtitle */}
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-2xl text-white font-medium mb-12 max-w-4xl leading-relaxed opacity-90"
+            transition={{ duration: 1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg md:text-2xl text-white/70 font-light mb-14 max-w-3xl leading-relaxed"
           >
-            Your frictionless portal to local experiences and products, powered by Stellar
+            {t.hero.subtitle_1} <strong className="font-medium text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">{t.hero.powered_by}</strong>.
           </motion.p>
 
+          {/* Elegant Action Buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 1, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row items-center gap-6"
           >
             <button 
               onClick={() => {
                 document.getElementById('partners')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-[#0A110D] bg-gradient-to-r from-[#50FFB4] to-[#3BB2FF] rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(80,255,180,0.4)] active:scale-95 text-sm tracking-widest uppercase"
+              className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-brand-accent to-[#FF8C00] text-[#0A110D] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(251,191,36,0.4)] text-sm tracking-[0.15em] uppercase font-bold"
             >
-              Discover Local Packages
+              <span>{t.hero.discover}</span>
+              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </button>
             
             <button 
               onClick={() => {
-                document.getElementById('payments')?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('stronghold-partnership')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-white bg-transparent border-2 border-brand-accent rounded-full overflow-hidden transition-all duration-300 hover:bg-brand-accent/10 active:scale-95 text-sm tracking-widest uppercase"
+              className="group relative flex items-center justify-center gap-3 px-10 py-5 text-white bg-white/5 border border-white/20 rounded-full overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-brand-accent/50 text-sm tracking-[0.15em] uppercase font-medium backdrop-blur-md"
             >
-              How It Works
+              {t.hero.how_it_works}
             </button>
           </motion.div>
         </motion.div>
@@ -120,7 +149,7 @@ export const Hero: React.FC = () => {
           transition={{ duration: 1, delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce text-white/40"
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase mb-2 font-medium">Explorar</span>
+          <span className="text-[10px] tracking-[0.3em] uppercase mb-2 font-medium">{t.hero.scroll}</span>
           <div className="w-[1px] h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
         </motion.div>
     </section>

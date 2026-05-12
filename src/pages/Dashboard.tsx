@@ -62,7 +62,7 @@ export const Dashboard = () => {
     };
   }, [user]);
 
-  const handleBuyTokens = async (e: React.FormEvent) => {
+  const handleAddFunds = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       // Create charge on our backend
@@ -98,8 +98,8 @@ export const Dashboard = () => {
                             currency: 'usd',
                             paymentSourceId: paymentSource.id
                         },
-                        onSuccess: (charge: any) => {
-                            alert('Pago exitoso. Los tokens se verán reflejados pronto.');
+                        onSuccess: () => {
+                            alert('Pago exitoso. Los fondos se verán reflejados pronto.');
                             // The backend webhook will handle incrementing the balance
                         },
                         onError: (err: any) => {
@@ -124,7 +124,7 @@ export const Dashboard = () => {
          alert('Error al inicializar el pago con Stronghold.');
       }
     } catch (error) {
-      console.error('Error buying tokens:', error);
+      console.error('Error adding funds:', error);
       alert('Error de conexión con el servidor de pagos.');
     }
   };
@@ -194,7 +194,7 @@ export const Dashboard = () => {
             <Coins className="text-brand-accent w-6 h-6" />
             <div>
               <p className="text-sm text-brand-accent/80 font-medium">Balance Actual</p>
-              <p className="text-2xl font-bold text-white">{balance} <span className="text-brand-accent text-lg">$JFISH</span></p>
+              <p className="text-2xl font-bold text-white">{balance} <span className="text-brand-accent text-lg">USD</span></p>
             </div>
           </div>
         </header>
@@ -226,7 +226,7 @@ export const Dashboard = () => {
                         <div key={item.id} className="bg-black/40 p-4 rounded-xl border border-white/5 flex justify-between items-center">
                           <div>
                             <p className="font-bold text-lg">{item.nombre}</p>
-                            <p className="text-brand-accent">{item.precio_tokens} $JFISH</p>
+                            <p className="text-brand-accent">${item.precio_tokens} USD</p>
                           </div>
                           <div className="flex items-center gap-3 bg-white/5 rounded-lg p-1">
                             <button 
@@ -259,13 +259,13 @@ export const Dashboard = () => {
                         {cart.map(item => (
                           <div key={item.id} className="flex justify-between text-sm text-gray-300">
                             <span>{item.cantidad}x {item.nombre}</span>
-                            <span>{item.precio_tokens * item.cantidad} $JFISH</span>
+                            <span>${item.precio_tokens * item.cantidad} USD</span>
                           </div>
                         ))}
                       </div>
                       <div className="border-t border-white/10 pt-4 flex justify-between items-center">
                         <span className="font-bold">Total a pagar:</span>
-                        <span className="text-2xl font-bold text-brand-accent">{cartTotal} $JFISH</span>
+                        <span className="text-2xl font-bold text-brand-accent">${cartTotal} USD</span>
                       </div>
                       
                       <div className="pt-4 space-y-4">
@@ -309,7 +309,7 @@ export const Dashboard = () => {
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-red-400">-{order.total} $JFISH</p>
+                      <p className="font-bold text-red-400">-${order.total} USD</p>
                       <span className="text-xs bg-brand-primary/20 text-brand-accent px-2 py-1 rounded-full uppercase tracking-wider">
                         {order.estado}
                       </span>
@@ -324,15 +324,15 @@ export const Dashboard = () => {
           <div className="space-y-8">
             <section className="bg-gradient-to-b from-brand-primary/20 to-transparent p-6 rounded-2xl border border-brand-primary/30">
               <h2 className="text-xl font-display font-bold mb-4 flex items-center gap-2">
-                <Coins className="text-brand-accent" /> Comprar Tokens
+                <Coins className="text-brand-accent" /> Recargar Fondos
               </h2>
               <p className="text-sm text-gray-300 mb-6">
-                Recarga tu cuenta con tokens $JFISH para consumir dentro del ecosistema Jungle Fish. Valor actual: $0.12 USD / token.
+                Recarga tu cuenta con fondos para consumir dentro del ecosistema Jungle Fish de forma fácil y segura.
               </p>
               
-              <form onSubmit={handleBuyTokens} className="space-y-4">
+              <form onSubmit={handleAddFunds} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-400 mb-2">Cantidad de tokens</label>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">Monto a recargar (USD)</label>
                   <input 
                     type="number" 
                     min="10"
@@ -343,7 +343,7 @@ export const Dashboard = () => {
                 </div>
                 <div className="flex justify-between text-sm text-gray-400">
                   <span>Total a pagar:</span>
-                  <span className="font-bold text-white">${(buyAmount * 0.12).toFixed(2)} USD</span>
+                  <span className="font-bold text-white">${buyAmount.toFixed(2)} USD</span>
                 </div>
                 <button 
                   type="submit"
