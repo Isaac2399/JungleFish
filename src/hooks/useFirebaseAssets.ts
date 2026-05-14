@@ -10,7 +10,7 @@ export const useFirebaseAssets = () => {
   const [assets, setAssets] = useState<Record<string, string>>({
     // Default fallbacks while loading
     hero_bg: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&q=80&w=2000',
-    partner_jungle_fish: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=800',
+    partner_jungle_fish: '/assets/jungle_fish.jpg',
     partner_trapiche: '/assets/trapiche_de_pemo.png',
     partner_finca: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&q=80&w=800',
     logo: '/assets/logo.png',
@@ -29,8 +29,9 @@ export const useFirebaseAssets = () => {
         if (data.logo) newAssets.logo = data.logo;
         if (data.hero_bg) newAssets.hero_bg = data.hero_bg;
         
-        // Force trapiche to use the local high-quality asset regardless of Firebase
+        // Force trapiche and jungle fish to use the local high-quality assets regardless of Firebase
         newAssets.partner_trapiche = '/assets/trapiche_de_pemo.png';
+        newAssets.partner_jungle_fish = '/assets/jungle_fish.jpg';
         
         setAssets(prev => ({ ...prev, ...newAssets }));
       }

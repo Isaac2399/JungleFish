@@ -63,7 +63,7 @@ export const translations = {
       badge: "Infrastructure & Ecosystem",
       title_1: "Seamless Payments &",
       title_2: "Financial Sovereignty",
-      desc: "Our infrastructure on the Stellar network guarantees low-cost transactions that act as a bridge for collective well-being. We serve as connectors by integrating Stronghold Pay technology into local businesses, providing them with on-chain auditability and connecting them with a global community focused on social impact and the common good.",
+      desc: "Our infrastructure on the Stellar network guarantees near-instant (3-5s) and low-cost transactions. We act as connectors, integrating Stronghold Pay technology into local businesses, providing them with on-chain auditability and exposure to a \"Blockchain-Oriented\" audience.",
       steps: [
         {
           title: 'Explore the Ecosystem',
@@ -193,7 +193,7 @@ export const translations = {
       badge: "Infrastructure & Ecosystem",
       title_1: "Pagos Fluidos &",
       title_2: "Soberanía Financiera",
-      desc: "Nuestra infraestructura en la red Stellar garantiza transacciones de bajo costo que actúan como un puente para el bienestar colectivo. Servimos como conectores integrando la tecnología de Stronghold Pay en negocios locales, brindándoles auditabilidad en cadena y conectándolos con una comunidad global enfocada en el impacto social y el bien común.",
+      desc: "Nuestra infraestructura en la red Stellar garantiza transacciones casi instantáneas (3-5s) y de bajo costo. Actuamos como conectores integrando la tecnología de Stronghold Pay en comercios locales, brindándoles auditabilidad en cadena y exposición ante un público \"Blockchain-Oriented\".",
       steps: [
         {
           title: 'Explora el Ecosistema',
