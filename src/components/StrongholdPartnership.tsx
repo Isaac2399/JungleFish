@@ -41,7 +41,7 @@ export const StrongholdPartnership: React.FC = () => {
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold mb-6 text-white tracking-tight leading-tight uppercase">
             {t.partnership.title_1} <br className="hidden md:block" /><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-accent">{t.partnership.title_2}</span>
           </h2>
-          <p className="text-white/70 md:text-xl leading-relaxed max-w-3xl mx-auto" dangerouslySetInnerHTML={{ __html: t.partnership.desc.replace('"Blockchain-Oriented"', '<strong class="text-white font-bold">"Blockchain-Oriented"</strong>') }}>
+          <p className="text-white/70 md:text-xl leading-relaxed max-w-3xl mx-auto break-words" dangerouslySetInnerHTML={{ __html: t.partnership.desc.replace('"Blockchain-Oriented"', '<strong class="text-white font-bold break-words">"Blockchain-Oriented"</strong>') }}>
           </p>
         </div>
 

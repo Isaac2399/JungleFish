@@ -56,6 +56,9 @@ export const CurrentReality = () => {
           <h2 className="text-5xl md:text-7xl font-display font-bold mb-6 text-white uppercase tracking-tighter leading-none">
             {t.current_reality.title_1} <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-green to-brand-accent">{t.current_reality.title_2}</span>
           </h2>
+          <p className="text-white/70 text-lg md:text-xl font-light max-w-2xl mx-auto mb-8 leading-relaxed">
+            {t.current_reality.description}
+          </p>
           <div className="h-1 w-24 bg-brand-accent mx-auto rounded-full"></div>
         </motion.div>
         

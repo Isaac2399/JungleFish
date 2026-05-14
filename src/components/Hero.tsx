@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useFirebaseAssets } from '../hooks/useFirebaseAssets';
 import { useLanguage } from '../context/LanguageContext';
+import { WhitepaperModal } from './WhitepaperModal';
 
 export const Hero: React.FC = () => {
   const { assets } = useFirebaseAssets();
   const { t } = useLanguage();
+  const [isWhitepaperOpen, setIsWhitepaperOpen] = useState(false);
+
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-[#0A110D]">
       {/* Background Visuals */}
@@ -121,22 +124,13 @@ export const Hero: React.FC = () => {
             className="flex flex-col sm:flex-row items-center gap-6"
           >
             <button 
-              onClick={() => {
-                document.getElementById('partners')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => setIsWhitepaperOpen(true)}
               className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-brand-accent to-[#FF8C00] text-[#0A110D] rounded-full overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(251,191,36,0.4)] text-sm tracking-[0.15em] uppercase font-bold"
             >
-              <span>{t.hero.discover}</span>
-              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </button>
-            
-            <button 
-              onClick={() => {
-                document.getElementById('stronghold-partnership')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="group relative flex items-center justify-center gap-3 px-10 py-5 text-white bg-white/5 border border-white/20 rounded-full overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-brand-accent/50 text-sm tracking-[0.15em] uppercase font-medium backdrop-blur-md"
-            >
-              {t.hero.how_it_works}
+              <svg className="w-5 h-5 text-[#0A110D] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>{t.roadmap.whitepaper_btn}</span>
             </button>
           </motion.div>
         </motion.div>
@@ -152,6 +146,8 @@ export const Hero: React.FC = () => {
           <span className="text-[10px] tracking-[0.3em] uppercase mb-2 font-medium">{t.hero.scroll}</span>
           <div className="w-[1px] h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
         </motion.div>
+
+      <WhitepaperModal isOpen={isWhitepaperOpen} onClose={() => setIsWhitepaperOpen(false)} />
     </section>
   );
 };
